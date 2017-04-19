@@ -1,9 +1,9 @@
 # -*- mode: ruby -*-
 # vi: set ft=ruby :
 
-$cassandra = 3
-$cassandra_mem = 2048
-$cassandra_cpu = 2
+$cassandra = 1
+$cassandra_mem = 1024
+$cassandra_cpu = 1
 $ip_prefix = "192.168.50."
 
 def nodeIP(num)
@@ -44,9 +44,9 @@ Vagrant.configure("2") do |config|
 
       cassandra.vm.provision "shell", :privileged => true, inline: <<-SHELL
       echo Updating linux ...
-      yum -y -q update
+      time yum -y -q update
       echo Installing tool packages ...
-      yum -y -q install net-tools bind-utils wget nc curl strace tcpdump java-1.8.0-openjdk
+      time yum -y -q install net-tools bind-utils wget nc curl strace tcpdump java-1.8.0-openjdk
       USER=cassandra
       GROUP=cassandra
       PKG=datastax-ddc-3.9.0-bin.tar.gz
@@ -66,7 +66,7 @@ Vagrant.configure("2") do |config|
       echo Password1 | passwd root --stdin
 
       echo Downloading Cassandra ...
-      wget -q http://downloads.datastax.com/datastax-ddc/datastax-ddc-3.9.0-bin.tar.gz
+      time wget -q http://downloads.datastax.com/datastax-ddc/datastax-ddc-3.9.0-bin.tar.gz
 
       echo Installing Cassandra ...
       tar xfz $PKG -C /opt
@@ -155,4 +155,7 @@ Vagrant.configure("2") do |config|
   # yum update -y
   # yum install -y net-tools nc bind-utils wget curl git
   # SHELL
+
+  echo Starting Cassandra
+  su -c $DIR/bin/cassandra - cassandra
 end
