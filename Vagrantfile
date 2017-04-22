@@ -92,6 +92,8 @@ Vagrant.configure("2") do |config|
       dc=DC1
       rack=RAC1
       EOF
+      echo Starting Cassandra
+      su -c $DIR/bin/cassandra - cassandra
       SHELL
     end
   end
@@ -156,6 +158,5 @@ Vagrant.configure("2") do |config|
   # yum install -y net-tools nc bind-utils wget curl git
   # SHELL
 
-  echo Starting Cassandra
-  su -c $DIR/bin/cassandra - cassandra
+
 end
