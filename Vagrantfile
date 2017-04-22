@@ -1,7 +1,7 @@
 # -*- mode: ruby -*-
 # vi: set ft=ruby :
 
-$cassandra = 1
+$cassandra = 3
 $cassandra_mem = 1024
 $cassandra_cpu = 1
 $ip_prefix = "192.168.50."
