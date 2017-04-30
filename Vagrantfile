@@ -76,7 +76,7 @@ tar xfz $PKG -C /opt
 chown -R $USER:$GROUP $DIR
 
 echo Applying configuration ...
-sed -i -e "s/^cluster_name:.*/cluster_name: 'Experian'/" $DIR/conf/cassandra.yaml
+sed -i -e "s/^cluster_name:.*/cluster_name: 'MyCluster'/" $DIR/conf/cassandra.yaml
 sed -i -e "s/^num_tokens:.*/num_tokens: 256/" $DIR/conf/cassandra.yaml
 sed -i -e "s/ seeds:.*/ seeds: 'node1'/" $DIR/conf/cassandra.yaml
 echo listen_address: $MY_IP
