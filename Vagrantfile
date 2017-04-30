@@ -5,6 +5,8 @@ $cassandra = 3
 $cassandra_mem = 1024
 $cassandra_cpu = 1
 $ip_prefix = "192.168.50."
+$tb = "en4: Thunderbolt Ethernet"
+$wifi = "en0: Wi-Fi (AirPort)"
 
 def nodeIP(num)
   return "#{$ip_prefix}#{num+99}"
@@ -35,6 +37,7 @@ Vagrant.configure("2") do |config|
         vb.cpus = $cassandra_cpu
         vb.gui = false
       end
+      cassandra.vm.network "forwarded_port", guest_ip: "192.168.50.100", guest: 9042, host_ip: "127.0.0.1", host: 9042, auto_correct: true
       cassandra.vm.network "private_network", ip: nodeIP(i)
       # , virtualbox__intnet: true
       # cassandra.vm.provision :file, :source => hosts_file, :destination => "/vagrant/vm-provisions/hosts.txt"
